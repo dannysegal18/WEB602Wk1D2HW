@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Food Blog</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <aside id="leftside"></aside>
+        <aside id="rightside"></aside>
+        <div id="container">
+            <header>
+                <app-nav></app-nav>
+            </header>
+
+            <main>
+
+            <!-- Convert image to vue -->
+            <aside id="photos" >
+                <img :src="chiliImageSrc" alt="White Chicken Chili" width="180">
+            </aside>
+
+            <h2>{{ subtitle }}</h2>
+
+            <section id="blogposts">
+                <div class="post" v-for="post in posts">
+                    <a href="#" @click="showProfileBox(post.author)" data-toggle="modal" data-target="#profileModal">
+                        <img v-bind:src="'images/profile.png'" alt="Author" width="60">
+                    </a>
+                    <span class="author">{{ post.author }}</span> 
+                    <span class="author">{{ post.date }}</span>
+                    <span class="reply">{{ post.reply }}</span>
+                    <p>{{post.content}}</p>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <!-- Modal header -->
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="profileModalLabel">{{ selectedAuthor }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <p><strong>Foodie Level:</strong> {{ getLevel(selectedAuthor) }}</p>
+                                <p><strong>Bio:</strong> {{ getBio(selectedAuthor) }}</p>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            </main>
+
+            <footer>
+                &copy; Copyright FOOD BLOG
+            </footer>
+            
+        </div>
+    </div>
+
+    <script src="vue/day3.js"></script>
+</body>
+</html>
